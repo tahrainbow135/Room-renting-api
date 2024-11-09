@@ -1,6 +1,6 @@
 package com.tuanh.repository;
 
-import com.tuanh.models.ApplicationUser;
+import com.tuanh.entities.ApplicationUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

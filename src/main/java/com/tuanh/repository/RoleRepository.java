@@ -1,6 +1,6 @@
 package com.tuanh.repository;
 
-import com.tuanh.models.Role;
+import com.tuanh.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

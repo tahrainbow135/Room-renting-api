@@ -1,4 +1,4 @@
-package com.tuanh.models;
+package com.tuanh.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,13 +10,12 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Role extends BaseEntity implements GrantedAuthority {
 
 	@Getter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "role_id")
-	private Integer roleId;
+	private Integer id;
 
 	private String authority;
 

@@ -1,7 +1,7 @@
 package com.tuanh;
 
-import com.tuanh.models.ApplicationUser;
-import com.tuanh.models.Role;
+import com.tuanh.entities.ApplicationUser;
+import com.tuanh.entities.Role;
 import com.tuanh.repository.RoleRepository;
 import com.tuanh.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -29,7 +29,11 @@ public class Application {
 			Set<Role> roles = new HashSet<>();
 			roles.add(adminRole);
 
-			ApplicationUser admin = new ApplicationUser(1, "admin", passwordEncode.encode("password"), roles);
+			ApplicationUser admin = new ApplicationUser();
+			admin.setId(1);
+			admin.setUsername("admin");
+			admin.setPassword(passwordEncode.encode("password"));
+			admin.setAuthorities(roles);
 
 			userRepository.save(admin);
 		};

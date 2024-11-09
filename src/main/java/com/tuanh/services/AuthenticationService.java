@@ -1,8 +1,11 @@
 package com.tuanh.services;
 
+import com.tuanh.constants.Message;
 import com.tuanh.dtos.LoginResponseDto;
-import com.tuanh.models.ApplicationUser;
-import com.tuanh.models.Role;
+import com.tuanh.dtos.UserDto;
+import com.tuanh.entities.ApplicationUser;
+import com.tuanh.entities.Role;
+import com.tuanh.exceptions.HttpException;
 import com.tuanh.repository.RoleRepository;
 import com.tuanh.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +38,12 @@ public class AuthenticationService {
 
 		authorities.add(userRole);
 
-		return userRepository.save(new ApplicationUser(0, username, encodedPassword, authorities));
+		ApplicationUser user = new ApplicationUser();
+		user.setUsername(username);
+		user.setPassword(encodedPassword);
+		user.setAuthorities(authorities);
+
+		return userRepository.save(user);
 	}
 
 	public LoginResponseDto loginUser(String username, String password) {
@@ -46,7 +54,14 @@ public class AuthenticationService {
 
 			String token = tokenService.generateJwt(auth);
 
-			return new LoginResponseDto(userRepository.findByUsername(username).get(), token);
+			ApplicationUser user = userRepository.findByUsername(username)
+				.orElseThrow(() -> HttpException.notFound(Message.USER_NOT_FOUND.getMessage()));
+
+			UserDto userDto = new UserDto();
+			userDto.setUsername(user.getUsername());
+			userDto.setAuthorities(user.getAuthorities());
+
+			return new LoginResponseDto(userDto, token);
 
 		} catch (AuthenticationException e) {
 			return new LoginResponseDto(null, "");
