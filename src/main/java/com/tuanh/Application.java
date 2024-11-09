@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -22,9 +23,12 @@ public class Application {
 	@Bean
 	CommandLineRunner run(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncode) {
 		return args -> {
-			if (roleRepository.findByAuthority("ADMIN").isPresent()) return;
+			if (roleRepository.findAllByAuthorityIn(List.of("ADMIN", "HOUSE OWNER", "USER")).size() == 3) return;
 			Role adminRole = roleRepository.save(new Role("ADMIN"));
+			roleRepository.save(new Role("HOUSE OWNER"));
 			roleRepository.save(new Role("USER"));
+
+			if (userRepository.findByUsername("admin").isPresent()) return;
 
 			Set<Role> roles = new HashSet<>();
 			roles.add(adminRole);
@@ -32,6 +36,7 @@ public class Application {
 			ApplicationUser admin = new ApplicationUser();
 			admin.setId(1);
 			admin.setUsername("admin");
+			admin.setFullName("System Admin");
 			admin.setPassword(passwordEncode.encode("password"));
 			admin.setAuthorities(roles);
 

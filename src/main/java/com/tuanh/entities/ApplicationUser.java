@@ -20,6 +20,11 @@ public class ApplicationUser extends BaseEntity implements UserDetails {
 	@Column(unique = true)
 	private String username;
 	private String password;
+	private String fullName;
+
+	@Column(unique = true)
+	private String email;
+	private String phone;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
