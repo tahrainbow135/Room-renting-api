@@ -12,6 +12,12 @@ public enum Message {
 	USER_EMAIL_ALREADY_EXISTS("User with email %s already exists"),
 	USER_PASSWORD_CHANGED_SUCCESSFULLY("User password changed successfully"),
 	USER_ROLE_ASSIGNED_SUCCESSFULLY("User role assigned successfully"),
+
+	// Roles
+	ROLE_NOT_FOUND("Role not found"),
+
+	// Houses
+	HOUSE_NOT_FOUND("House not found"),
 	;
 
 	private final String message;
