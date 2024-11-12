@@ -33,5 +33,5 @@ public class Role extends BaseEntity implements GrantedAuthority {
 	}
 
 	@ManyToMany(mappedBy = "authorities")
-	private Set<ApplicationUser> users;
+	private Set<User> users;
 }

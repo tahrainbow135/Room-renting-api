@@ -1,7 +1,7 @@
 package com.tuanh;
 
-import com.tuanh.entities.ApplicationUser;
 import com.tuanh.entities.Role;
+import com.tuanh.entities.User;
 import com.tuanh.repository.RoleRepository;
 import com.tuanh.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -23,9 +23,9 @@ public class Application {
 	@Bean
 	CommandLineRunner run(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncode) {
 		return args -> {
-			if (roleRepository.findAllByAuthorityIn(List.of("ADMIN", "HOUSE OWNER", "USER")).size() == 3) return;
+			if (roleRepository.findAllByAuthorityIn(List.of("ADMIN", "OWNER", "USER")).size() >= 3) return;
 			Role adminRole = roleRepository.save(new Role("ADMIN"));
-			roleRepository.save(new Role("HOUSE OWNER"));
+			roleRepository.save(new Role("OWNER"));
 			roleRepository.save(new Role("USER"));
 
 			if (userRepository.findByUsername("admin").isPresent()) return;
@@ -33,7 +33,7 @@ public class Application {
 			Set<Role> roles = new HashSet<>();
 			roles.add(adminRole);
 
-			ApplicationUser admin = new ApplicationUser();
+			User admin = new User();
 			admin.setId(1);
 			admin.setUsername("admin");
 			admin.setFullName("System Admin");

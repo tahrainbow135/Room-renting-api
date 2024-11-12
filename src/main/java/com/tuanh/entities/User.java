@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "users")
-public class ApplicationUser extends BaseEntity implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,6 +26,9 @@ public class ApplicationUser extends BaseEntity implements UserDetails {
 	private String email;
 	private String phone;
 
+	@Column(name = "permanent_address")
+	private String permanentAddress;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 		name = "user_role",
@@ -34,7 +37,7 @@ public class ApplicationUser extends BaseEntity implements UserDetails {
 	)
 	private Set<Role> authorities;
 
-	public ApplicationUser() {
+	public User() {
 		super();
 		authorities = new HashSet<>();
 	}

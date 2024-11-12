@@ -1,5 +1,6 @@
 package com.tuanh.services;
 
+import com.tuanh.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +19,7 @@ public class TokenService {
 	private final JwtEncoder jwtEncoder;
 	private final JwtDecoder jwtDecoder;
 
-	public String generateJwt(Authentication auth) {
+	public String generateJwt(Authentication auth, User user) {
 
 		Instant now = Instant.now();
 
@@ -29,8 +30,10 @@ public class TokenService {
 		JwtClaimsSet claims = JwtClaimsSet.builder()
 			.issuer("self")
 			.issuedAt(now)
+			.expiresAt(now.plusSeconds(3600 * 24))
 			.subject(auth.getName())
 			.claim("roles", scope)
+			.claim("user_id", user.getId())
 			.build();
 
 		return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
