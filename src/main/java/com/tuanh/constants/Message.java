@@ -18,6 +18,9 @@ public enum Message {
 
 	// Houses
 	HOUSE_NOT_FOUND("House not found"),
+
+	// Rooms
+	ROOM_NOT_FOUND("Room not found"),
 	;
 
 	private final String message;

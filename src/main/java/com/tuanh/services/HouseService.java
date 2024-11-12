@@ -26,7 +26,7 @@ public class HouseService {
 
 	public List<HouseDto> findAll() {
 		return houseRepository.findAll().stream()
-			.map(HouseMapper::toHouseDto)
+			.map(HouseMapper::toDto)
 			.toList();
 	}
 
@@ -42,7 +42,7 @@ public class HouseService {
 		}
 
 		return houseRepository.findAllByOwnerId(ownerId).stream()
-			.map(HouseMapper::toHouseDto)
+			.map(HouseMapper::toDto)
 			.toList();
 	}
 
@@ -50,14 +50,14 @@ public class HouseService {
 		House house = houseRepository.findById(id)
 			.orElseThrow(() -> HttpException.badRequest(Message.HOUSE_NOT_FOUND.getMessage()));
 
-		return HouseMapper.toHouseDto(house);
+		return HouseMapper.toDto(house);
 	}
 
 	public HouseDto createHouse(HouseDto houseDto) {
 		User owner = userRepository.findById(houseDto.getOwner().getId())
 			.orElseThrow(() -> HttpException.badRequest(Message.USER_NOT_FOUND.getMessage()));
 
-		House house = HouseMapper.toHouse(houseDto);
+		House house = HouseMapper.toEntity(houseDto);
 
 
 		Role ownerRole = roleRepository.findByAuthority("OWNER")
@@ -67,7 +67,7 @@ public class HouseService {
 
 		house.setOwner(owner);
 
-		return HouseMapper.toHouseDto(houseRepository.save(house));
+		return HouseMapper.toDto(houseRepository.save(house));
 	}
 
 	public HouseDto updateHouse(HouseDto houseDto) {
@@ -80,7 +80,7 @@ public class HouseService {
 
 		HouseMapper.merge(house, houseDto);
 
-		return HouseMapper.toHouseDto(houseRepository.save(house));
+		return HouseMapper.toDto(houseRepository.save(house));
 	}
 
 	public void deleteHouse(Integer id) {
