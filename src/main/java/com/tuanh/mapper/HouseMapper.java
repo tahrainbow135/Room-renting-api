@@ -4,7 +4,7 @@ import com.tuanh.dtos.HouseDto;
 import com.tuanh.entities.House;
 
 public class HouseMapper {
-	public static HouseDto toHouseDto(House house) {
+	public static HouseDto toDto(House house) {
 		return HouseDto.builder()
 			.id(house.getId())
 			.name(house.getName())
@@ -19,7 +19,7 @@ public class HouseMapper {
 			.build();
 	}
 
-	public static House toHouse(HouseDto houseDto) {
+	public static House toEntity(HouseDto houseDto) {
 		House house = new House();
 		house.setName(houseDto.getName());
 		house.setAddressLine(houseDto.getAddressLine());
