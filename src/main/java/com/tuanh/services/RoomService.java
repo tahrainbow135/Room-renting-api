@@ -38,7 +38,7 @@ public class RoomService {
 	public RoomDto create(Integer houseId, RoomDto roomDto) {
 		Integer userId = jwtAuthenticationManager.getUserId();
 		User owner = userRepository.findById(userId)
-			.orElseThrow(() -> HttpException.notFound(Message.USER_NOT_FOUND.getMessage()));
+			.orElseThrow(() -> HttpException.unauthorized(Message.UNAUTHORIZED.getMessage()));
 
 		House house = houseRepository.findById(houseId)
 			.orElseThrow(() -> HttpException.notFound(Message.HOUSE_NOT_FOUND.getMessage()));
@@ -56,7 +56,7 @@ public class RoomService {
 	public RoomDto update(Integer houseId, RoomDto roomDto) {
 		Integer userId = jwtAuthenticationManager.getUserId();
 		User owner = userRepository.findById(userId)
-			.orElseThrow(() -> HttpException.notFound(Message.USER_NOT_FOUND.getMessage()));
+			.orElseThrow(() -> HttpException.unauthorized(Message.UNAUTHORIZED.getMessage()));
 
 		Room room = roomRepository.findById(roomDto.getId())
 			.orElseThrow(() -> HttpException.notFound(Message.ROOM_NOT_FOUND.getMessage()));
@@ -73,7 +73,7 @@ public class RoomService {
 	public void delete(Integer roomId) {
 		Integer userId = jwtAuthenticationManager.getUserId();
 		User owner = userRepository.findById(userId)
-			.orElseThrow(() -> HttpException.notFound(Message.USER_NOT_FOUND.getMessage()));
+			.orElseThrow(() -> HttpException.unauthorized(Message.UNAUTHORIZED.getMessage()));
 
 		Room room = roomRepository.findById(roomId)
 			.orElseThrow(() -> HttpException.notFound(Message.ROOM_NOT_FOUND.getMessage()));

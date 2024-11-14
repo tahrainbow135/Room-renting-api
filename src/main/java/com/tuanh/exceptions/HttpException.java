@@ -14,6 +14,10 @@ public class HttpException extends RuntimeException {
 		this.status = status;
 	}
 
+	public static HttpException unauthorized(String message) {
+		return new HttpException(message, HttpStatus.UNAUTHORIZED);
+	}
+
 	public static HttpException notFound(String message) {
 		return new HttpException(message, HttpStatus.NOT_FOUND);
 	}
