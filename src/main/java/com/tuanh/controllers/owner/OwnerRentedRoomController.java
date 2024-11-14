@@ -5,6 +5,7 @@ import com.tuanh.controllers.BaseController;
 import com.tuanh.dtos.RentedRoomDto;
 import com.tuanh.dtos.ResponseDto;
 import com.tuanh.services.RentedRoomService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class OwnerRentedRoomController extends BaseController {
 	@PostMapping
 	public ResponseEntity<ResponseDto> createRentedRoom(
 		@PathVariable Integer roomId,
-		@RequestBody RentedRoomDto rentedRoomDto
+		@RequestBody @Valid RentedRoomDto rentedRoomDto
 	) {
 		return createSuccessResponse(ResponseDto.success(rentedRoomService.create(roomId, rentedRoomDto)));
 	}

@@ -57,6 +57,10 @@ public class RentedRoomService {
 		Room room = roomRepository.findById(roomId)
 			.orElseThrow(() -> HttpException.notFound(Message.ROOM_NOT_FOUND.getMessage()));
 
+		if (rentedRoomDto.getNumberOfTenants() > room.getCapacity()) {
+			throw HttpException.badRequest(Message.TENANTS_EXCEED_CAPACITY.getMessage(room.getCapacity()));
+		}
+
 		User owner = room.getHouse().getOwner();
 		User currentUser = userRepository.findById(jwtAuthenticationManager.getUserId())
 			.orElseThrow(() -> HttpException.unauthorized(Message.UNAUTHORIZED.getMessage()));

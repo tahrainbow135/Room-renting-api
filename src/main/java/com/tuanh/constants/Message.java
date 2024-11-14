@@ -30,6 +30,7 @@ public enum Message {
 	RENTED_ROOM_NOT_FOUND("Rented room not found"),
 	ROOM_ALREADY_RENTED("Room is already rented"),
 	RENTED_ROOM_NOT_IN_ROOM("Rented room is not in the room"),
+	TENANTS_EXCEED_CAPACITY("Number of tenants exceeds room capacity of %d"),
 
 	// Assets
 	ASSET_NOT_FOUND("Asset not found in room"),

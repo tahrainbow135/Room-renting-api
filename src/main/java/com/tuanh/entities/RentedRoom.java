@@ -17,9 +17,18 @@ public class RentedRoom extends BaseEntity {
 
 	private String tenantName;
 	private String tenantPhone;
+	private Integer numberOfTenants;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private String contractUrl;
+
+	private Integer price;
+	private Integer electricityPrice;
+	private Integer waterPrice;
+	private Integer internetPrice;
+	private Integer generalPrice;
+	private Integer initElectricityNum;
+	private Integer initWaterNum;
 
 	@ManyToOne
 	@JoinColumn(name = "room_id", referencedColumnName = "id")
