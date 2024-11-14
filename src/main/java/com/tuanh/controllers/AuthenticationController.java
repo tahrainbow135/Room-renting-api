@@ -1,5 +1,6 @@
 package com.tuanh.controllers;
 
+import com.tuanh.constants.ControllerPath;
 import com.tuanh.dtos.ResponseDto;
 import com.tuanh.dtos.request.AuthenticationRequestDto;
 import com.tuanh.services.AuthenticationService;
@@ -8,8 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
-@CrossOrigin("*")
+@RequestMapping(ControllerPath.AUTH_CONTROLLER)
 @RequiredArgsConstructor
 public class AuthenticationController extends BaseController {
 	private final AuthenticationService authenticationService;

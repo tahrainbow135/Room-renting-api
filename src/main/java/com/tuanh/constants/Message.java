@@ -30,6 +30,9 @@ public enum Message {
 	RENTED_ROOM_NOT_FOUND("Rented room not found"),
 	ROOM_ALREADY_RENTED("Room is already rented"),
 	RENTED_ROOM_NOT_IN_ROOM("Rented room is not in the room"),
+
+	// Assets
+	ASSET_NOT_FOUND("Asset not found in room"),
 	;
 
 	private final String message;

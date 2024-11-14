@@ -1,5 +1,6 @@
 package com.tuanh.controllers.owner;
 
+import com.tuanh.constants.ControllerPath;
 import com.tuanh.controllers.BaseController;
 import com.tuanh.dtos.RentedRoomDto;
 import com.tuanh.dtos.ResponseDto;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/owner/rooms/{roomId}/rented-rooms")
+@RequestMapping(ControllerPath.OWNER_RENTED_ROOM_CONTROLLER)
 @RequiredArgsConstructor
 public class OwnerRentedRoomController extends BaseController {
 	private final RentedRoomService rentedRoomService;

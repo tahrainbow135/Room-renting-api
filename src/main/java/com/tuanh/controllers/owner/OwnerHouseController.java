@@ -1,5 +1,6 @@
 package com.tuanh.controllers.owner;
 
+import com.tuanh.constants.ControllerPath;
 import com.tuanh.controllers.BaseController;
 import com.tuanh.dtos.HouseDto;
 import com.tuanh.dtos.ResponseDto;
@@ -12,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/owner/houses")
+@RequestMapping(ControllerPath.OWNER_HOUSE_CONTROLLER)
 @RequiredArgsConstructor
 public class OwnerHouseController extends BaseController {
 	private final HouseService houseService;
