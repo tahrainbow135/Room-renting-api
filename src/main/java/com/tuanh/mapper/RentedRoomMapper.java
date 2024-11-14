@@ -12,6 +12,7 @@ public class RentedRoomMapper {
 			.numberOfTenants(rentedRoom.getNumberOfTenants())
 			.startDate(rentedRoom.getStartDate())
 			.endDate(rentedRoom.getEndDate())
+			.paymentDay(rentedRoom.getPaymentDay())
 			.contractUrl(rentedRoom.getContractUrl())
 			.price(rentedRoom.getPrice())
 			.electricityPrice(rentedRoom.getElectricityPrice())
@@ -40,6 +41,7 @@ public class RentedRoomMapper {
 		rentedRoom.setNumberOfTenants(rentedRoomDto.getNumberOfTenants());
 		rentedRoom.setStartDate(rentedRoomDto.getStartDate());
 		rentedRoom.setEndDate(rentedRoomDto.getEndDate());
+		rentedRoom.setPaymentDay(rentedRoomDto.getPaymentDay());
 		rentedRoom.setContractUrl(rentedRoomDto.getContractUrl());
 		rentedRoom.setPrice(rentedRoomDto.getPrice());
 		rentedRoom.setElectricityPrice(rentedRoomDto.getElectricityPrice());

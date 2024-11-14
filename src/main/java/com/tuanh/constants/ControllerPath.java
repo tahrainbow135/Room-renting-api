@@ -10,4 +10,5 @@ public class ControllerPath {
 	public static final String OWNER_ROOM_CONTROLLER = "/owner/houses/{houseId}/rooms";
 	public static final String OWNER_RENTED_ROOM_CONTROLLER = "/owner/rooms/{roomId}/rented-rooms";
 	public static final String OWNER_ASSET_CONTROLLER = "/owner/rooms/{roomId}/assets";
+	public static final String OWNER_INVOICE_CONTROLLER = "/owner/rented-rooms/{rentedRoomId}/invoices";
 }

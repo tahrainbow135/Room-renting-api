@@ -34,6 +34,13 @@ public enum Message {
 
 	// Assets
 	ASSET_NOT_FOUND("Asset not found in room"),
+
+	// Invoices
+	INVOICE_NOT_FOUND("Invoice not found"),
+	INVALID_ELECTRICITY_NUM("Electricity number must be greater than the previous invoice"),
+	INVALID_WATER_NUM("Water number must be greater than the previous invoice"),
+	INVOICE_ALREADY_PAID("Invoice has already been paid"),
+	INVOICE_NOT_BELONG_TO_RENTED_ROOM("Invoice does not belong to rented room"),
 	;
 
 	private final String message;

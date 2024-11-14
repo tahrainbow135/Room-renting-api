@@ -33,6 +33,9 @@ public class RentedRoomDto extends BaseDto {
 	@NotNull(message = "End date is required")
 	private LocalDate endDate;
 
+	@NotNull(message = "Payment day is required")
+	private Integer paymentDay;
+
 	@NotBlank(message = "Contract URL is required")
 	private String contractUrl;
 
