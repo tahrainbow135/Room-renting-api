@@ -10,6 +10,9 @@ public enum Message {
 	// General
 	START_DATE_AFTER_END_DATE("Start date is after end date"),
 
+	// Auth
+	INVALID_CREDENTIALS("Invalid credentials"),
+
 	// Users
 	USER_NOT_FOUND("User not found"),
 	USER_EMAIL_NOT_FOUND("User with email %s not found"),

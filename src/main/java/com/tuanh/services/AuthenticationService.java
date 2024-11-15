@@ -63,7 +63,7 @@ public class AuthenticationService {
 			return new LoginResponseDto(userDto, token);
 
 		} catch (AuthenticationException e) {
-			return new LoginResponseDto(null, "");
+			throw HttpException.badRequest(Message.INVALID_CREDENTIALS.getMessage());
 		}
 	}
 
