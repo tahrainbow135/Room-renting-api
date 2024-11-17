@@ -3,6 +3,7 @@ package com.tuanh.services;
 import com.tuanh.constants.Message;
 import com.tuanh.dtos.LoginResponseDto;
 import com.tuanh.dtos.UserDto;
+import com.tuanh.dtos.request.RegisterUserDto;
 import com.tuanh.entities.Role;
 import com.tuanh.entities.User;
 import com.tuanh.exceptions.HttpException;
@@ -31,8 +32,14 @@ public class AuthenticationService {
 	private final AuthenticationManager authenticationManager;
 	private final TokenService tokenService;
 
-	public User registerUser(String username, String password) {
-		String encodedPassword = passwordEncoder.encode(password);
+	public User registerUser(RegisterUserDto registerUserDto) {
+		Boolean existingUser = userRepository.existsByUsernameOrEmail(registerUserDto.getUsername(), registerUserDto.getEmail());
+
+		if (existingUser) {
+			throw HttpException.badRequest(Message.USER_ALREADY_EXISTS.getMessage());
+		}
+
+		String encodedPassword = passwordEncoder.encode(registerUserDto.getPassword());
 		Role userRole = roleRepository.findByAuthority("USER").get();
 
 		Set<Role> authorities = new HashSet<>();
@@ -40,7 +47,10 @@ public class AuthenticationService {
 		authorities.add(userRole);
 
 		User user = new User();
-		user.setUsername(username);
+		user.setUsername(registerUserDto.getUsername());
+		user.setFullName(registerUserDto.getFullName());
+		user.setEmail(registerUserDto.getEmail());
+		user.setPhone(registerUserDto.getPhone());
 		user.setPassword(encodedPassword);
 		user.setAuthorities(authorities);
 

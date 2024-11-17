@@ -12,13 +12,10 @@ public enum Message {
 
 	// Auth
 	INVALID_CREDENTIALS("Invalid credentials"),
+	USER_ALREADY_EXISTS("User already exists"),
 
 	// Users
 	USER_NOT_FOUND("User not found"),
-	USER_EMAIL_NOT_FOUND("User with email %s not found"),
-	USER_EMAIL_ALREADY_EXISTS("User with email %s already exists"),
-	USER_PASSWORD_CHANGED_SUCCESSFULLY("User password changed successfully"),
-	USER_ROLE_ASSIGNED_SUCCESSFULLY("User role assigned successfully"),
 
 	// Roles
 	ROLE_NOT_FOUND("Role not found"),

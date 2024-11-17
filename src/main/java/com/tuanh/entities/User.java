@@ -26,9 +26,6 @@ public class User extends BaseEntity implements UserDetails {
 	private String email;
 	private String phone;
 
-	@Column(name = "permanent_address")
-	private String permanentAddress;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 		name = "user_role",
