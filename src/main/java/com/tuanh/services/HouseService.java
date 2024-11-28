@@ -38,7 +38,7 @@ public class HouseService {
 			.orElseThrow(() -> HttpException.badRequest(Message.ROLE_NOT_FOUND.getMessage()));
 
 		if (!owner.getAuthorities().contains(ownerRole)) {
-			throw HttpException.badRequest(Message.PERMISSION_DENIED.getMessage());
+			throw HttpException.forbidden(Message.PERMISSION_DENIED.getMessage());
 		}
 
 		return houseRepository.findAllByOwnerId(ownerId).stream()

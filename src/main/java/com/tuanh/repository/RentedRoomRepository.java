@@ -14,4 +14,6 @@ public interface RentedRoomRepository extends JpaRepository<RentedRoom, Integer>
 
 	@Query("SELECT CASE WHEN COUNT(rr) > 0 THEN TRUE ELSE FALSE END FROM RentedRoom rr WHERE rr.room.id = ?1 AND ((rr.startDate <= ?2 AND rr.endDate >= ?2) OR (rr.startDate <= ?3 AND rr.endDate >= ?3) OR (rr.startDate >= ?2 AND rr.endDate <= ?3))")
 	Boolean checkIfRoomIsRentedInPeriod(Integer roomId, LocalDate startDate, LocalDate endDate);
+
+	Boolean existsByRoomIdAndEndDateAfter(Integer roomId, LocalDate endDate);
 }

@@ -8,12 +8,14 @@ import com.tuanh.entities.User;
 import com.tuanh.exceptions.HttpException;
 import com.tuanh.mapper.RoomMapper;
 import com.tuanh.repository.HouseRepository;
+import com.tuanh.repository.RentedRoomRepository;
 import com.tuanh.repository.RoomRepository;
 import com.tuanh.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,16 +25,29 @@ public class RoomService {
 	private final RoomRepository roomRepository;
 	private final HouseRepository houseRepository;
 	private final UserRepository userRepository;
+	private final RentedRoomRepository rentedRoomRepository;
 
 	private final JwtAuthenticationManager jwtAuthenticationManager;
 
 	public List<RoomDto> findAllByHouseId(Integer houseId) {
-		return roomRepository.findAllByHouseId(houseId).stream().map(RoomMapper::toDto).toList();
+		List<RoomDto> rooms = roomRepository.findAllByHouseId(houseId).stream().map(RoomMapper::toDto).toList();
+		LocalDate now = LocalDate.now();
+		for (RoomDto room : rooms) {
+			// Check if the room is rented currently
+			room.setIsCurrentlyRented(rentedRoomRepository.existsByRoomIdAndEndDateAfter(room.getId(), now));
+		}
+
+		return rooms;
 	}
 
 	public RoomDto findById(Integer id) {
-		return roomRepository.findById(id).map(RoomMapper::toDto)
+		RoomDto room = roomRepository.findById(id).map(RoomMapper::toDto)
 			.orElseThrow(() -> HttpException.notFound(Message.ROOM_NOT_FOUND.getMessage()));
+
+		LocalDate now = LocalDate.now();
+		room.setIsCurrentlyRented(rentedRoomRepository.existsByRoomIdAndEndDateAfter(room.getId(), now));
+
+		return room;
 	}
 
 	public RoomDto create(Integer houseId, RoomDto roomDto) {

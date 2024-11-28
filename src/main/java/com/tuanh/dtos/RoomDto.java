@@ -16,5 +16,6 @@ public class RoomDto extends BaseDto {
 	private String name;
 	private Integer capacity;
 	private String description;
+	private Boolean isCurrentlyRented;
 	private HouseDto house;
 }
