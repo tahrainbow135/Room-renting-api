@@ -9,6 +9,8 @@ public class UserMapper {
 			.id(user.getId())
 			.username(user.getUsername())
 			.fullName(user.getFullName())
+			.email(user.getEmail())
+			.phone(user.getPhone())
 			.authorities(user.getAuthorities())
 			.createdAt(user.getCreatedAt())
 			.updatedAt(user.getUpdatedAt())
