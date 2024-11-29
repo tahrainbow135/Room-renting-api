@@ -20,6 +20,14 @@ public class OwnerRoomController extends BaseController {
 		return createSuccessResponse(ResponseDto.success(roomService.findAllByHouseId(houseId)));
 	}
 
+	@GetMapping("/{roomId}")
+	public ResponseEntity<ResponseDto> getRoomById(
+		@PathVariable Integer houseId,
+		@PathVariable Integer roomId
+	) {
+		return createSuccessResponse(ResponseDto.success(roomService.findById(roomId)));
+	}
+
 	@PostMapping
 	public ResponseEntity<ResponseDto> createRoom(
 		@PathVariable Integer houseId,
