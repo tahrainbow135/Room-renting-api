@@ -25,7 +25,7 @@ public class Invoice extends BaseEntity {
 	private Integer internetPrice;
 	@Column(nullable = false)
 	private Integer generalPrice;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private LocalDate dueDate;
 	private LocalDate paymentDate;
 	@Column(nullable = false)
